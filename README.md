@@ -9,7 +9,7 @@
 
 [以中文查看](./README_zh-CN.md)
 
-Lightweight front-end framework based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/yelouafi/redux-saga) and [react-router@2.x](https://github.com/ReactTraining/react-router/tree/v2.8.1). (Inspired by [elm](http://elm-lang.org/) and [choo](https://github.com/yoshuawuyts/choo))
+Lightweight front-end framework based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/redux-saga/redux-saga) and [react-router](https://github.com/ReactTraining/react-router). (Inspired by [elm](http://elm-lang.org/) and [choo](https://github.com/yoshuawuyts/choo))
 
 ---
 
@@ -19,8 +19,8 @@ Lightweight front-end framework based on [redux](https://github.com/reactjs/redu
 * **Elm concepts**: organize models with `reducers`, `effects` and `subscriptions`
 * **Support mobile and react-native**: cross platform ([ReactNative Example](https://github.com/sorrycc/dva-example-react-native))
 * **Support HMR**: support HMR for components, routes and models with [babel-plugin-dva-hmr](https://github.com/dvajs/babel-plugin-dva-hmr)
-* **Support load model and routes dynamically**: Improve performance ([Example](https://github.com/dvajs/dva/tree/master/examples/dynamic-load))
-* **Plugin system**: e.g. we have [dva-loading](https://github.com/dvajs/dva-loading) plugin to handle loading state automatically
+* **Support load model and routes dynamically**: Improve performance ([Example](https://github.com/dvajs/dva/blob/master/docs/API.md#dvadynamic))
+* **Plugin system**: e.g. we have [dva-loading](https://github.com/dvajs/dva/tree/master/packages/dva-loading) plugin to handle loading state automatically
 * **Support TypeScript**：with d.ts ([Example](https://github.com/sorrycc/dva-boilerplate-typescript))
 
 ## Why dva ?
@@ -30,12 +30,14 @@ Lightweight front-end framework based on [redux](https://github.com/reactjs/redu
 
 ## Demos
 
-* [Count](https://github.com/dvajs/dva/blob/master/examples/count) ([jsfiddle](https://jsfiddle.net/puftw0ea/3/)): Simple count example
-* [User Dashboard](https://github.com/dvajs/dva-example-user-dashboard): User management dashboard
-* [HackerNews](https://github.com/dvajs/dva-hackernews)  ([Demo](https://dvajs.github.io/dva-hackernews/)): HackerNews Clone
-* [antd-admin](https://github.com/zuiidea/antd-admin) ([Demo](http://zuiidea.github.io/antd-admin/)): Admin dashboard based on antd and dva
-* [github-stars](https://github.com/sorrycc/github-stars) ([Demo](http://sorrycc.github.io/github-stars/#/?_k=rmj86f))，Github Star management tool
-* [react-native-dva-starter](https://github.com/nihgwu/react-native-dva-starter) a React Native starter powered by dva and react-navigation
+* [Count](https://stackblitz.com/edit/dva-example-count): Simple count example
+* [User Dashboard](https://github.com/dvajs/dva/tree/master/packages/dva-example-user-dashboard): User management dashboard
+* [HackerNews](https://github.com/dvajs/dva-hackernews): ([Demo](https://dvajs.github.io/dva-hackernews/)): HackerNews Clone
+* [antd-admin](https://github.com/zuiidea/antd-admin): ([Demo](http://antd-admin.zuiidea.com/)): Admin dashboard based on antd and dva
+* [github-stars](https://github.com/sorrycc/github-stars): ([Demo](http://sorrycc.github.io/github-stars/#/?_k=rmj86f))，Github Star management tool
+* [react-native-dva-starter](https://github.com/nihgwu/react-native-dva-starter): A React Native starter powered by dva and react-navigation
+* [dva-example-nextjs](https://github.com/dvajs/dva/tree/master/packages/dva-example-nextjs): Integrate dva with next.js
+* [Account System](https://github.com/yvanwangl/AccountSystem.git): A small inventory management system
 
 ## Quick Start
 
@@ -54,7 +56,7 @@ Lightweight front-end framework based on [redux](https://github.com/reactjs/redu
 
 ### Is it production ready?
 
-Sure! We have 100+ projects using dva, both in Alibaba and out.
+Sure! We have 200+ projects using dva in Alibaba.
 
 ### Does it support IE8?
 
@@ -74,7 +76,7 @@ Want more?
 
 * 看看 dva 的前身 [React + Redux 最佳实践](https://github.com/sorrycc/blog/issues/1)，知道 dva 是怎么来的
 * 在 gitc 分享 dva 的 PPT ：[React 应用框架在蚂蚁金服的实践](http://slides.com/sorrycc/dva)
-* 如果还在用 dva@0.x，请尽快 [升级到 1.x](https://github.com/dvajs/dva/pull/42#issuecomment-241323617)
+* 如果还在用 dva@1.x，请尽快 [升级到 2.x](https://github.com/sorrycc/blog/issues/48)
 
 ## License
 

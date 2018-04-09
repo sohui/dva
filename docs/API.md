@@ -7,13 +7,9 @@
 
 Default export file.
 
-### dva/mobile
-
-`dva/mobile` is the dva without router, should be used in multiple-page app, react-native, and so on.
-
 ### dva/router
 
-Export the api of [react-router@2.x](https://github.com/ReactTraining/react-router/tree/v2.8.1), and also export [react-router-redux](https://github.com/reactjs/react-router-redux) with the `routerRedux` key.
+Export the api of [react-router@4.x](https://github.com/ReactTraining/react-router), and also export [react-router-redux](https://github.com/reactjs/react-router-redux) with the `routerRedux` key.
 
 e.g.
 
@@ -29,6 +25,30 @@ Async request library, export the api of [isomorphic-fetch](https://github.com/m
 
 Export the api of [redux-saga](https://github.com/yelouafi/redux-saga).
 
+### dva/dynamic
+
+Util method to load React Component and dva model dynamically.
+
+e.g.
+
+```js
+import dynamic from 'dva/dynamic';
+
+const UserPageComponent = dynamic({
+  app,
+  models: () => [
+    import('./models/users'),
+  ],
+  component: () => import('./routes/UserPage'),
+});
+```
+
+`opts` include:
+
+* app: dva instance
+* models: function which return promise, and the promise return dva model
+* component：function which return promise, and the promise return React Component
+
 ## dva API
 ### `app = dva(opts)`
 
@@ -42,9 +62,9 @@ Create app, and return dva instance. (Notice: dva support multiple instances.)
 e.g. use `browserHistory`:
 
 ```js
-import { browserHistory } from 'dva/router';
+import createHistory from 'history/createBrowserHistory';
 const app = dva({
-  history: browserHistory,
+  history: createHistory(),
 });
 ```
 
@@ -79,7 +99,7 @@ app.use(createLoading(opts));
 
 `hooks` includes:
 
-#### `onError(fn, dispatch)`
+#### `onError((err, dispatch) => {})`
 
 Triggered when `effect` has error or `subscription` throw error with `done`. Used for managing global error.
 
@@ -192,7 +212,7 @@ Register model, view [#Model](#model)  for details.
 
 Unregister model.
 
-### `app.router(({ history, app } => RouterConfig)`
+### `app.router(({ history, app }) => RouterConfig)`
 
 Register router config.
 
@@ -303,7 +323,7 @@ Store reducers in key/value Object. reducer is the only place to modify `state`.
 
 `(state, action) => newState` or `[(state, action) => newState, enhancer]`
 
-View https://github.com/dvajs/dva/blob/master/test/reducers-test.js for details.
+View https://github.com/dvajs/dva/blob/master/packages/dva-core/test/reducers-test.js for details.
 
 ### effects
 
@@ -318,7 +338,7 @@ type includes:
 * `throttle`
 * `watcher`
 
-View https://github.com/dvajs/dva/blob/master/test/effects-test.js for details.
+View https://github.com/dvajs/dva/blob/master/packages/dva-core/test/effects-test.js for details.
 
 ### subscriptions
 

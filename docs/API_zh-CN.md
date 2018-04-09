@@ -7,13 +7,9 @@
 
 默认输出文件。
 
-### dva/mobile
-
-`dva/mobile` 是无 router 版的 dva，可用于多页应用，react-native 等。叫 `dva/mobile` 有点欠考虑，可能在下个大版本中改名。
-
 ### dva/router
 
-默认输出 [react-router@2.x](https://github.com/ReactTraining/react-router/tree/v2.8.1) 接口， [react-router-redux](https://github.com/reactjs/react-router-redux) 的接口通过属性 routerRedux 输出。
+默认输出 [react-router](https://github.com/ReactTraining/react-router) 接口， [react-router-redux](https://github.com/reactjs/react-router-redux) 的接口通过属性 routerRedux 输出。
 
 比如：
 
@@ -29,6 +25,30 @@ import { Router, Route, routerRedux } from 'dva/router';
 
 输出 [redux-saga](https://github.com/yelouafi/redux-saga) 的接口，主要用于用例的编写。（用例中需要用到 effects）
 
+### dva/dynamic
+
+解决组件动态加载问题的 util 方法。
+
+比如：
+
+```js
+import dynamic from 'dva/dynamic';
+
+const UserPageComponent = dynamic({
+  app,
+  models: () => [
+    import('./models/users'),
+  ],
+  component: () => import('./routes/UserPage'),
+});
+```
+
+`opts` 包含：
+
+* app: dva 实例，加载 models 时需要
+* models: 返回 Promise 数组的函数，Promise 返回 dva model
+* component：返回 Promise 的函数，Promise 返回 React Component
+
 ## dva API
 ### `app = dva(opts)`
 
@@ -42,9 +62,9 @@ import { Router, Route, routerRedux } from 'dva/router';
 如果要配置 history 为 `browserHistory`，可以这样：
 
 ```js
-import { browserHistory } from 'dva/router';
+import createHistory from 'history/createBrowserHistory';
 const app = dva({
-  history: browserHistory,
+  history: createHistory(),
 });
 ```
 
@@ -79,9 +99,9 @@ app.use(createLoading(opts));
 
 `hooks` 包含：
 
-#### `onError(fn, dispatch)`
+#### `onError((err, dispatch) => {})`
 
- `effect` 执行错误或 `subscription` 通过 `done` 主动抛错时触发，可用于管理全局出错状态。
+`effect` 执行错误或 `subscription` 通过 `done` 主动抛错时触发，可用于管理全局出错状态。
 
 注意：`subscription` 并没有加 `try...catch`，所以有错误时需通过第二个参数 `done` 主动抛错。例子：
 
@@ -184,7 +204,7 @@ persistStore(app._store);
 
 取消 model 注册，清理 reducers, effects 和 subscriptions。subscription 如果没有返回 unlisten 函数，使用 `app.unmodel` 会给予警告⚠️。
 
-### `app.router(({ history, app } => RouterConfig)`
+### `app.router(({ history, app }) => RouterConfig)`
 
 注册路由表。
 
@@ -238,7 +258,7 @@ model 是 dva 中最重要的概念。以下是典型的例子：
 ```js
 app.model({
   namespace: 'todo',
-	state: [],
+  state: [],
   reducers: {
     add(state, { payload: todo }) {
       // 保存数据到 state
@@ -295,7 +315,7 @@ app.model({
 
 格式为 `(state, action) => newState` 或 `[(state, action) => newState, enhancer]`。
 
-详见： https://github.com/dvajs/dva/blob/master/test/reducers-test.js
+详见： https://github.com/dvajs/dva/blob/master/packages/dva-core/test/reducers-test.js
 
 ### effects
 
@@ -310,7 +330,7 @@ type 类型有：
 * `throttle`
 * `watcher`
 
-详见：https://github.com/dvajs/dva/blob/master/test/effects-test.js
+详见：https://github.com/dvajs/dva/blob/master/packages/dva-core/test/effects-test.js
 
 ### subscriptions
 

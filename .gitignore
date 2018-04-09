@@ -2,9 +2,15 @@
 tmp
 node_modules
 lib
+es
 dist
 coverage
 .nyc_output
 npm-debug.log*
-test/typescript/*.map
-test/typescript/*.jsx
+lerna-debug.log
+package-lock.json
+.changelog
+.next/
+packages/**/.umi
+packages/**/.umi-production
+
